@@ -44,3 +44,14 @@ module.exports.createBlog = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error", error: err.message });
     }
 };
+
+module.exports.updateBlog = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const blog = req.body;
+        const result = await BlogModel.findByIdAndUpdate(id, { $set: blog }, { new: true });
+        res.send(result);
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Internal server error", error: err.message });
+    }
+};
