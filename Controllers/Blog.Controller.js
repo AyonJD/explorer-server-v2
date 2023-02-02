@@ -10,9 +10,9 @@ module.exports.blogCount = async (req, res) => {
 };
 
 module.exports.getAllBlogWithPegination = async (req, res) => {
-    const page = parseInt(req.query.page);
-    const count = parseInt(req.query.count);
     try {
+        const page = parseInt(req.query.page);
+        const count = parseInt(req.query.count);
         let blogs;
         if (page || count) {
             blogs = await BlogModel.find({}).skip(page * count).limit(count);
@@ -26,10 +26,20 @@ module.exports.getAllBlogWithPegination = async (req, res) => {
 };
 
 module.exports.getBlogById = async (req, res) => {
-    const id = req.params.id;
     try {
+        const id = req.params.id;
         const blog = await BlogModel.findById(id);
         res.send(blog);
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Internal server error", error: err.message });
+    }
+};
+
+module.exports.createBlog = async (req, res) => {
+    try {
+        const blog = req.body;
+        const result = await BlogModel.create(blog);
+        res.send(result);
     } catch (err) {
         res.status(500).json({ success: false, message: "Internal server error", error: err.message });
     }
