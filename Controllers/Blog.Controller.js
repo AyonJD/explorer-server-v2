@@ -2,7 +2,6 @@ const BlogModel = require('../Models/Blog.Model.js');
 
 module.exports.blogCount = async (req, res) => {
     try {
-        const blogs = await BlogModel.find();
         const blogsCount = await BlogModel.countDocuments({});
         res.status(200).json({ success: true, message: "Successfully fetched all blogs", blogsCount });
     } catch (err) {
