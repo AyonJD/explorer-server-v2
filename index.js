@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const UserRoute = require('./Routes/User.Route.js');
 const ThemeRoute = require('./Routes/Theme.Route.js');
+const BlogRoute = require('./Routes/Blog.Route.js');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
 });
 app.use(`${baseUrl}/auth/user`, UserRoute);
 app.use(`${baseUrl}/theme`, ThemeRoute);
+app.use(`${baseUrl}/blogs`, BlogRoute);
 
 
 //All
