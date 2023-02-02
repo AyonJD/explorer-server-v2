@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
 require('dotenv').config();
 
+const UserRoute = require('./Routes/User.Route.js');
+const ThemeRoute = require('./Routes/Theme.Route.js');
+
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -29,7 +32,12 @@ app.listen(PORT, () => {
 
 app.get("/", (req, res) => {
     res.send("Server is running");
-})
+});
+
+const baseUrl = process.env.BASE_ROUTE;
+
+app.use(`${baseUrl}/auth/user`, UserRoute);
+app.use(`${baseUrl}/theme`, ThemeRoute);
 
 
 //All
