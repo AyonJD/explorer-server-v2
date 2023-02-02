@@ -30,12 +30,11 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+const baseUrl = process.env.BASE_ROUTE;
+
 app.get("/", (req, res) => {
     res.send("Server is running");
 });
-
-const baseUrl = process.env.BASE_ROUTE;
-
 app.use(`${baseUrl}/auth/user`, UserRoute);
 app.use(`${baseUrl}/theme`, ThemeRoute);
 
